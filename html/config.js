@@ -16,6 +16,20 @@ SiteShow    = true;
 SiteCircles = true;
 SiteCirclesDistances = [0.5, 1, 3, 5];
 SiteCirclesColors = ['#FF0000', '#FFA500', '#FFFF00', '#00FF00'];
+SiteAllowedICAO = ['e007bc'];  // Example: simulated drone.
+
+if (SiteCircles && SiteCirclesDistances?.length > 0) {
+    let distances = [...SiteCirclesDistances].sort((a,b) => a - b);
+    let colors = SiteCirclesColors || [];
+    distances.forEach((distance, index) => {
+        AlertRanges.push({
+            distance: distance,
+            color: colors[index] || '#FF0000',
+            sound: 'sounds/alarm.ogg',
+        });
+    });
+}
+
 updateLocation = true;
 
 MapType_tar1090 = "osm";

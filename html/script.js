@@ -135,7 +135,6 @@ let enableDynamicCachebusting = false;
 g.lastRefreshInt = 1000;
 let reapTimeout = globeIndex ? 240 : 480;
 
-
 let baroCorrectQNH = 1013.25;
 
 let limitUpdates = -1;
@@ -218,7 +217,6 @@ function processAircraft(ac, init, uat) {
             plane.uat = true;
     }
 
-
     if (showTrace)
         return;
 
@@ -231,12 +229,11 @@ function processAircraft(ac, init, uat) {
         }
         return;
     }
+
     if (uat_now == 0) {
         plane.updateData(now, last, ac, init);
         return;
     }
-
-    // UAT dual source stuff below
 
     let newPos = ac.seen_pos;
     if (newPos === undefined || isNaN(newPos)) {

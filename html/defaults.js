@@ -38,6 +38,8 @@ let showGrid = false;
 
 let SiteShow    = true;           // true to show a center marker
 let SiteName    = "My Radar Site"; // tooltip of the marker
+let SiteAllowedICAO = [];
+let AlertRanges = [];
 
 // Update GPS location (keep map centered on GPS location)
 let updateLocation = false;
