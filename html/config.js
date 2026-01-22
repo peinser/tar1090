@@ -14,7 +14,7 @@ autoselectCoords = [];
 
 SiteShow    = true;
 SiteCircles = true;
-SiteCirclesDistances = [0.5, 1, 3, 5];
+SiteCirclesDistances = [0.5, 1, 3, 5];  // In KM
 SiteCirclesColors = ['#FF0000', '#FFA500', '#FFFF00', '#00FF00'];
 SiteAllowedICAO = ['e007bc'];  // Example: simulated drone.
 

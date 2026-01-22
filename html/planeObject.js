@@ -1663,7 +1663,8 @@ PlaneObject.prototype.updateData = function (now, last, data, init) {
     this.last = now;
     this.updatePositionData(now, last, data, init);
 
-    if (SiteLat != null && SiteLon != null && this.position) {
+    const alt = this.alt_geom || this.alt_baro;
+    if (SiteLat != null && SiteLon != null && this.position && alt != "ground") {
         if (SiteAllowedICAO.includes(this.icao)) return;
         let distMeters = this.sitedist;
         if (distMeters == null) {
@@ -1671,7 +1672,7 @@ PlaneObject.prototype.updateData = function (now, last, data, init) {
             distMeters = ol.sphere.getDistance(sitePos, this.position);
         }
 
-        let divisor = 1000;
+        let divisor = 1000;  // Convert to km by default
         switch (DisplayUnits) {
             case "nautical":
                 divisor = 1852;
@@ -1681,7 +1682,13 @@ PlaneObject.prototype.updateData = function (now, last, data, init) {
                 break;
         }
 
-        const dist = distMeters / divisor;
+        const deltaAltitude = alt - SiteAltMeters;
+        if (deltaAltitude < 0) {
+            console.warn("Specified Site Altitude is above aircraft altitude for " + this.icao + "!");
+            return;
+        }
+
+        const dist = Math.sqrt(distMeters ** 2 + deltaAltitude ** 2);
 
         let violated = null;
         for (let range of AlertRanges) {

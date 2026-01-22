@@ -5987,6 +5987,10 @@ function parseURLIcaos() {
     }
 }
 function processURLParams(){
+    if (usp.has('SiteAltMeters')) {
+        SiteAltMeters = Math.max(usp.getFloat('SiteAltMeters'), 0);
+    }
+
     if (usp.has('showTrace')) {
         let date = setTraceDate({string: usp.get('showTrace')});
         if (date && usp.has('startTime')) {

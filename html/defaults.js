@@ -38,6 +38,7 @@ let showGrid = false;
 
 let SiteShow    = true;           // true to show a center marker
 let SiteName    = "My Radar Site"; // tooltip of the marker
+let SiteAltMeters = 0;		  // altitude of the site in meters
 let SiteAllowedICAO = [];
 let AlertRanges = [];
 
