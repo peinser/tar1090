@@ -1663,7 +1663,7 @@ PlaneObject.prototype.updateData = function (now, last, data, init) {
     this.last = now;
     this.updatePositionData(now, last, data, init);
 
-    const alt = this.alt_geom || this.alt_baro;
+    const alt = this.alt_geom || this.alt_baro;  // Prefer WGS84 altitude if available.
     if (SiteLat != null && SiteLon != null && this.position && alt != "ground") {
         if (SiteAllowedICAO.includes(this.icao)) return;
         let distMeters = this.sitedist;
