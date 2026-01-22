@@ -1672,23 +1672,13 @@ PlaneObject.prototype.updateData = function (now, last, data, init) {
             distMeters = ol.sphere.getDistance(sitePos, this.position);
         }
 
-        let divisor = 1000;  // Convert to km by default
-        switch (DisplayUnits) {
-            case "nautical":
-                divisor = 1852;
-                break;
-            case "imperial":
-                divisor = 1609.34;
-                break;
-        }
-
-        const deltaAltitude = alt - SiteAltMeters;
+        const deltaAltitude = alt - SiteAltMeters;  // Asummed to be in meters.
         if (deltaAltitude < 0) {
             console.warn("Specified Site Altitude is above aircraft altitude for " + this.icao + "!");
             return;
         }
 
-        const dist = Math.sqrt(distMeters ** 2 + deltaAltitude ** 2);
+        const dist = Math.sqrt(distMeters ** 2 + deltaAltitude ** 2) / 1000.0;  // To KM
 
         let violated = null;
         for (let range of AlertRanges) {
